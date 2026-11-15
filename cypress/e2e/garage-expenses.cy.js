@@ -24,7 +24,15 @@ describe("Garage and Fuel Expenses Tests", () => {
     garagePage.addCar("Audi", "TT", "1000");
     cy.contains("Audi TT").should("be.visible");
 
+    cy.intercept("POST", "**/api/expenses").as("createExpense");
+
     expensesPage.addExpense("1100", "40", "60");
+
+    cy.wait("@createExpense").then(({ response }) => {
+      cy.log(`Expense API status: ${response.statusCode}`);
+      expect(response.statusCode).to.eq(201);
+    });
+
     cy.contains("1100").should("be.visible");
     cy.contains("40L").should("be.visible");
     cy.contains(/60(\.00)? USD/).should("be.visible");
