@@ -31,6 +31,14 @@ class ExpensesPage {
     this.getTotalCostInput().type(totalCost);
     this.getAddButton().click();
   }
+
+  getExpensesTable() {
+    return cy.get("table");
+  }
+
+  getExpenseRow(mileage) {
+    return this.getExpensesTable().contains("td", mileage).parent("tr");
+  }
 }
 
 export default ExpensesPage;
