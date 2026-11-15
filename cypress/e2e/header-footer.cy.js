@@ -1,69 +1,46 @@
+import HomePage from "../pages/HomePage";
+
+const homePage = new HomePage();
+
 describe("Header and Footer Tests", () => {
   beforeEach(() => {
-    cy.visit("https://qauto.forstudy.space/", {
-      auth: {
-        username: "guest",
-        password: "welcome2qauto",
-      },
-    });
+    homePage.visit();
   });
 
   it("should display header elements", () => {
-    cy.get(".header_logo").should("be.visible").and("have.attr", "href");
+    homePage.getHeaderLogo().should("be.visible").and("have.attr", "href");
 
-    cy.contains("a", "Home").should("be.visible").and("have.attr", "href");
+    homePage.getHomeLink().should("be.visible").and("have.attr", "href");
 
-    cy.contains("button", "About").should("be.visible").and("not.be.disabled");
+    homePage.getAboutButton().should("be.visible").and("not.be.disabled");
 
-    cy.contains("button", "Contacts")
-      .should("be.visible")
-      .and("not.be.disabled");
+    homePage.getContactsButton().should("be.visible").and("not.be.disabled");
 
-    cy.contains("button", "Guest log in")
-      .should("be.visible")
-      .and("not.be.disabled");
+    homePage.getGuestLoginButton().should("be.visible").and("not.be.disabled");
 
-    cy.contains("button", "Sign In")
-      .should("be.visible")
-      .and("not.be.disabled");
+    homePage.getSignInButton().should("be.visible").and("not.be.disabled");
   });
 
   it("should display contact links", () => {
-    cy.get(".socials_icon.icon-facebook")
-      .should("be.visible")
-      .parent("a")
-      .should("have.attr", "href");
+    homePage.getFacebookLink().should("be.visible").and("have.attr", "href");
 
-    cy.get(".socials_icon.icon-telegram")
-      .should("be.visible")
-      .parent("a")
-      .should("have.attr", "href");
+    homePage.getTelegramLink().should("be.visible").and("have.attr", "href");
 
-    cy.get(".socials_icon.icon-youtube")
-      .should("be.visible")
-      .parent("a")
-      .should("have.attr", "href");
+    homePage.getYoutubeLink().should("be.visible").and("have.attr", "href");
 
-    cy.get(".socials_icon.icon-instagram")
-      .should("be.visible")
-      .parent("a")
-      .should("have.attr", "href");
+    homePage.getInstagramLink().should("be.visible").and("have.attr", "href");
 
-    cy.get(".socials_icon.icon-linkedin")
-      .should("be.visible")
-      .parent("a")
-      .should("have.attr", "href");
+    homePage.getLinkedinLink().should("be.visible").and("have.attr", "href");
 
-    cy.contains("a.contacts_link", "ithillel.ua")
-      .should("be.visible")
-      .and("have.attr", "href");
+    homePage.getIthillelLink().should("be.visible").and("have.attr", "href");
 
-    cy.contains("a.contacts_link", "support@ithillel.ua")
+    homePage
+      .getSupportEmailLink()
       .should("be.visible")
       .and("have.attr", "href");
   });
 
   it("should display footer elements", () => {
-    cy.get(".footer_logo").should("be.visible").and("have.attr", "href");
+    homePage.getFooterLogo().should("be.visible").and("have.attr", "href");
   });
 });
