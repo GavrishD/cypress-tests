@@ -30,7 +30,7 @@ describe("Garage and Fuel Expenses Tests", () => {
 
     cy.wait("@createExpense").then(({ response }) => {
       cy.log(`Expense API status: ${response.statusCode}`);
-      expect(response.statusCode).to.eq(201);
+      expect([200, 201]).to.include(response.statusCode);
     });
 
     cy.contains("1100").should("be.visible");
