@@ -27,9 +27,10 @@ class ExpensesPage {
     this.getFuelExpensesLink().click();
     this.getAddExpenseButton().click();
     this.getMileageInput()
-      .type("{home}{shift}{end}{backspace}")
+      .clear()
       .should("have.value", "")
-      .type(mileage);
+      .type(mileage)
+      .blur();
     this.getLitersInput().type(liters);
     this.getTotalCostInput().type(totalCost);
     this.getMileageInput().should("have.value", mileage);
