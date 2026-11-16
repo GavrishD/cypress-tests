@@ -17,8 +17,8 @@ module.exports = defineConfig({
     defaultCommandTimeout: 10000,
 
     env: {
-      email: "potter01@hogwarts.com",
-      password: "Hahaha1234",
+      email: process.env.CYPRESS_TEST_EMAIL,
+      password: process.env.CYPRESS_TEST_PASSWORD,
     },
 
     setupNodeEvents(on, config) {
