@@ -26,7 +26,10 @@ class ExpensesPage {
   addExpense(mileage, liters, totalCost) {
     this.getFuelExpensesLink().click();
     this.getAddExpenseButton().click();
-    this.getMileageInput().click().type("{selectall}").type(mileage);
+    this.getMileageInput()
+      .type("{home}{shift}{end}{backspace}")
+      .should("have.value", "")
+      .type(mileage);
     this.getLitersInput().type(liters);
     this.getTotalCostInput().type(totalCost);
     this.getMileageInput().should("have.value", mileage);
