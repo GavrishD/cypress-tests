@@ -21,10 +21,25 @@ describe("Garage and Fuel Expenses Tests", () => {
       loginPage.login(email, password);
     });
 
+    cy.intercept("POST", "**/api/cars").as("createCar");
+
     garagePage.addCar("Audi", "TT", "1000");
+
+    cy.wait("@createCar")
+      .its("response.statusCode")
+      .should("be.oneOf", [200, 201]);
+
     cy.contains("Audi TT").should("be.visible");
 
+    cy.intercept("POST", "**/api/expenses").as("createExpense");
+
     expensesPage.addExpense("1100", "40", "60");
+
+    cy.wait("@createExpense").then(({ response }) => {
+      cy.log(`Expense API status: ${response.statusCode}`);
+      expect([200, 201]).to.include(response.statusCode);
+    });
+
     cy.contains("1100").should("be.visible");
     cy.contains("40L").should("be.visible");
     cy.contains(/60(\.00)? USD/).should("be.visible");
